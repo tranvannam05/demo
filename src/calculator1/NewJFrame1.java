@@ -1,9 +1,12 @@
 package calculator1;
 
-
-
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.swing.JOptionPane;
 
 public class NewJFrame1 extends javax.swing.JFrame {
@@ -13,6 +16,131 @@ public class NewJFrame1 extends javax.swing.JFrame {
     String toanTu = " ";
     // để nhận biết khi nào bấm dấu =
     boolean ktdaubang = false;
+    private boolean DarkMode = false;
+
+    private void doiGiaoDien(boolean darkMode) {
+        Color nen = darkMode ? Color.DARK_GRAY : Color.WHITE;
+        Color chu = darkMode ? Color.WHITE : Color.BLACK;
+
+        // Thay đổi màu nền và chữ
+        this.getContentPane().setBackground(nen);  // background form
+
+        nhap.setBackground(nen);
+        nhap.setForeground(chu);
+
+        lichSu.setBackground(nen);
+        lichSu.setForeground(chu);
+
+        number_cong.setBackground(nen);
+        number_cong.setForeground(chu);
+
+        number_tru.setBackground(nen);
+        number_tru.setForeground(chu);
+
+        number_nhan.setBackground(nen);
+        number_nhan.setForeground(chu);
+
+        number_chia.setBackground(nen);
+        number_chia.setForeground(chu);
+
+        number_bang.setBackground(nen);
+        number_bang.setForeground(chu);
+
+        number_XmuY.setBackground(nen);
+        number_XmuY.setForeground(chu);
+
+        number_canbac2.setBackground(nen);
+        number_canbac2.setForeground(chu);
+
+        number_cham.setBackground(nen);
+        number_cham.setForeground(chu);
+
+        number_huy.setBackground(nen);
+        number_huy.setForeground(chu);
+
+        number_phantram.setBackground(nen);
+        number_phantram.setForeground(chu);
+
+        // Gọi phương thức xử lý sự kiện
+        // Sau đó đổi màu nền cho button number1 (giả sử bạn đã khai báo number1)
+        log.setForeground(chu);
+        log.setBackground(nen);
+        jButton10.setForeground(chu);
+        jButton10.setBackground(nen);
+        jButton12.setForeground(chu);
+        jButton12.setBackground(nen);
+        jButton13.setForeground(chu);
+        jButton13.setBackground(nen);
+        jButton14.setForeground(chu);
+        jButton14.setBackground(nen);
+        jButton15.setForeground(chu);
+        jButton15.setBackground(nen);
+        jButton16.setForeground(chu);
+        jButton16.setBackground(nen);
+        jButton17.setForeground(chu);
+        jButton17.setBackground(nen);
+        jButton18.setForeground(chu);
+        jButton18.setBackground(nen);
+        jButton2.setForeground(chu);
+        jButton2.setBackground(nen);
+        jButton3.setForeground(chu);
+        jButton3.setBackground(nen);
+        jButton4.setForeground(chu);
+        jButton4.setBackground(nen);
+        jButton5.setForeground(chu);
+        jButton5.setBackground(nen);
+        jButton6.setForeground(chu);
+        jButton6.setBackground(nen);
+        jButton7.setForeground(chu);
+        jButton7.setBackground(nen);
+        jButton8.setForeground(chu);
+        jButton8.setBackground(nen);
+        jButton9.setForeground(chu);
+        jButton9.setBackground(nen);
+        jButton1.setForeground(chu);
+        jButton1.setBackground(nen);
+        number1.setForeground(chu);
+        number1.setBackground(nen);
+        number_xoa.setForeground(chu);
+        number_xoa.setBackground(nen);
+        xoaLichSu.setForeground(chu);
+        xoaLichSu.setBackground(nen);          
+       // Lặp lại với các thành phần khác bạn có
+    }
+
+    private double xuli(String input) throws Exception {
+        input = input.replaceAll("\\s+", ""); // Xoá khoảng trắng
+
+        if (input.contains("+")) {
+            String[] parts = input.split("\\+");
+            return Double.parseDouble(parts[0]) + Double.parseDouble(parts[1]);
+        } else if (input.contains("-")) {
+            String[] parts = input.split("-");
+            return Double.parseDouble(parts[0]) - Double.parseDouble(parts[1]);
+        } else if (input.contains("*")) {
+            String[] parts = input.split("\\*");
+            return Double.parseDouble(parts[0]) * Double.parseDouble(parts[1]);
+        } else if (input.contains("/")) {
+            String[] parts = input.split("/");
+            double b = Double.parseDouble(parts[1]);
+            if (b == 0) {
+                throw new Exception("Không chia cho 0");
+            }
+            return Double.parseDouble(parts[0]) / b;
+        } else {
+            throw new Exception("Cú pháp không hợp lệ");
+        }
+    }
+
+    private void ghiVaoFile(String dongLichSu) {
+        try (FileWriter fw = new FileWriter("E:\\Project\\file.txt", true); BufferedWriter bw = new BufferedWriter(fw); PrintWriter out = new PrintWriter(bw)) {
+
+            out.println(dongLichSu);
+            out.flush();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 
     public NewJFrame1() {
         initComponents();
@@ -39,7 +167,7 @@ public class NewJFrame1 extends javax.swing.JFrame {
         number_chia = new javax.swing.JButton();
         jButton16 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
+        log = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
         number_nhan = new javax.swing.JButton();
         jButton15 = new javax.swing.JButton();
@@ -61,6 +189,7 @@ public class NewJFrame1 extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         lichSu = new javax.swing.JTextArea();
         xoaLichSu = new javax.swing.JButton();
+        color = new javax.swing.JButton();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -84,7 +213,7 @@ public class NewJFrame1 extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(nhap, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nhap, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -194,13 +323,13 @@ public class NewJFrame1 extends javax.swing.JFrame {
         });
         jPanel2.add(jButton7);
 
-        jButton11.setText("log₁₀ x");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
+        log.setText("log₁₀ x");
+        log.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                logActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton11);
+        jPanel2.add(log);
 
         jButton13.setText("ln x");
         jButton13.addActionListener(new java.awt.event.ActionListener() {
@@ -356,8 +485,8 @@ public class NewJFrame1 extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(xoaLichSu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(xoaLichSu, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -368,30 +497,44 @@ public class NewJFrame1 extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        color.setText("Color");
+        color.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                colorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(color)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(14, 14, 14))))
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(color, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -399,7 +542,13 @@ public class NewJFrame1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void nhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nhapActionPerformed
-        // TODO add your handling code here:
+        String input = nhap.getText().trim();
+        try {
+            double result = xuli(input); // Gọi hàm xử lý biểu thức
+            nhap.setText("" + result); // Hiển thị kết quả ngay trên textfield
+        } catch (Exception e) {
+            nhap.setText("Lỗi cú pháp");
+        }
     }//GEN-LAST:event_nhapActionPerformed
 
     private void number1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_number1ActionPerformed
@@ -462,24 +611,21 @@ public class NewJFrame1 extends javax.swing.JFrame {
                 ketQua = Math.pow(nhap1, nhap2);
 
             }
-//            // in ra kết quả ra màn hình trên textField
-//            nhap.setText("" + ketQua);
-//            // lưu lịch sử vào phép tính
-//            String lichsu = nhap1 + " " + toanTu + " " + nhap2 + "=" + ketQua;
-//            // thêm vào trong LichSu
-//            lichSu.append(lichsu + "\n");
-//           // Kiểm tra nếu kết quả là số nguyên
 
             // Làm tròn kết quả để loại bỏ sai số nhỏ
             ketQua = Math.round(ketQua * 100.0) / 100.0; // Làm tròn kết quả đến 2 chữ số thập phân
+            String dongLichSu = ""; // tạo dòng lịch sử để ghi file
+
             if (Math.floor(ketQua) == ketQua) {
                 nhap.setText("" + (int) ketQua); // Hiển thị số nguyên
-                lichSu.append((int) nhap1 + " " + toanTu + " " + (int) nhap2 + " = " + (int) ketQua + "\n");
+                dongLichSu = (int) nhap1 + " " + toanTu + " " + (int) nhap2 + " = " + (int) ketQua;
             } else {
                 nhap.setText("" + ketQua); // Hiển thị số thực
-                lichSu.append(nhap1 + " " + toanTu + " " + nhap2 + " = " + ketQua + "\n");
+                dongLichSu = nhap1 + " " + toanTu + " " + nhap2 + " = " + ketQua;
             }
 
+            lichSu.append(dongLichSu + "\n"); // ghi vào lịch sử giao diện
+            ghiVaoFile(dongLichSu);
             ktdaubang = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -564,6 +710,7 @@ public class NewJFrame1 extends javax.swing.JFrame {
             // thêm vào trong LichSu
             lichSu.append(lichsu + "\n");
             // kiểm tra dấu bằng để khỏ nhập tiếp tục từ bàn phím
+            ghiVaoFile(lichsu);
             ktdaubang = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -600,6 +747,7 @@ public class NewJFrame1 extends javax.swing.JFrame {
             lichSu.append(lichsu + "\n");
 
             // Đánh dấu rằng có thể nhập số mới
+            ghiVaoFile(lichsu);
             ktdaubang = true;
         } catch (NumberFormatException e) {
             e.printStackTrace();
@@ -637,6 +785,14 @@ public class NewJFrame1 extends javax.swing.JFrame {
     private void xoaLichSuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xoaLichSuActionPerformed
         // để  lịch sử thành rỗng
         lichSu.setText("");
+        // Xóa nội dung file
+        try {
+            FileWriter fw = new FileWriter("E:\\Project\\file.txt", false); // false để ghi đè
+            fw.write(""); // Ghi rỗng để xóa nội dung
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_xoaLichSuActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -677,7 +833,7 @@ public class NewJFrame1 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+    private void logActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logActionPerformed
         if (nhap.getText().equals("")) {
             return; // Nếu ô nhập rỗng thì không làm gì cả
         }
@@ -709,7 +865,7 @@ public class NewJFrame1 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Lỗi: Đầu vào không hợp lệ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
             nhap.setText("");
         }
-    }//GEN-LAST:event_jButton11ActionPerformed
+    }//GEN-LAST:event_logActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         if (nhap.getText().equals("")) {
@@ -879,6 +1035,18 @@ public class NewJFrame1 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton18ActionPerformed
 
+    private void colorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorActionPerformed
+        DarkMode = !DarkMode;
+        doiGiaoDien(DarkMode);
+
+        // (Tùy chọn) Đổi lại text trên nút
+        if (DarkMode) {
+            color.setText("light");
+        } else {
+            color.setText("dark");
+        }
+    }//GEN-LAST:event_colorActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -912,9 +1080,9 @@ public class NewJFrame1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton color;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
@@ -937,6 +1105,7 @@ public class NewJFrame1 extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea lichSu;
+    private javax.swing.JButton log;
     private javax.swing.JTextField nhap;
     private javax.swing.JButton number1;
     private javax.swing.JButton number_XmuY;
